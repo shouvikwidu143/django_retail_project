@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.sign-up-form-container, .login-form-container{
+    border: 1px solid grey;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+div.captcha-group{
+    display: flex;
+}
+
+#cq_captchaimg{
+    width: 50%;
+}
+
+input.half-width{
+    width: 50%;
+}

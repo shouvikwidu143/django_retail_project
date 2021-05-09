@@ -1,0 +1,13 @@
+{%extends "home/base.html"%}
+{%block content%}
+<div class="container mt-5">
+    <h3>You Have been Logged Out</h3>
+	<div class="border-top pt-3">
+		<small class="text-muted">
+            <a class="btn btn-link" href="{% url 'home' %}">&laquo; Back to Home</a>
+			<a class="btn btn-link" href="{% url 'login' %}">Log in Again</a>
+		</small>			
+	</div>
+</div>
+	
+{%endblock content%}
