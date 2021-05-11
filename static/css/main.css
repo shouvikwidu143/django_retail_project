@@ -23,3 +23,8 @@ div.captcha-group{
 input.half-width{
     width: 50%;
 }
+
+.btn-corner{
+    position: relative;
+    left: 4%;
+}

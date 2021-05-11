@@ -1,0 +1,21 @@
+{%extends "home/base.html"%}
+{%block content%}
+<div class="container mt-5">
+	<div class="content-section">
+		<form method="POST">
+			{% csrf_token %}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4 text-danger">Set the Address as Default?</legend>
+				<h2 class="text-info">Are you sure you want to make the address <b>{{ address.contact_name }}</b> default?</h2>
+			</fieldset>
+			<div class="form-group">
+                <div class="form-group">
+                  <input type="checkbox" hidden="true" checked name="is_primary_address" id="id_is_primary_address">
+                </div>
+				<button class="btn btn-outline-success" type="submit">Yes, Update</button>
+				<a class="btn btn-outline-secondary" href="{% url 'addresses' %}">Cancel</a>
+			</div>
+		</form>
+	</div>
+</div>
+{%endblock content%}

@@ -132,5 +132,5 @@ MEDIA_URL = '/media/'
 
 CAPTCHA_STRING = ''
 
-LOGIN_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'profile'
 LOGIN_URL = 'login'

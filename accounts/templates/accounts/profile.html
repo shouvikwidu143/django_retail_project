@@ -1,0 +1,37 @@
+{%extends "home/base.html"%}
+{%block content%}
+    <a class="btn btn-primary btn-corner ml-5 mt-5" href="{% url 'profile-edit' %}">Edit Profile</a>
+    <div class="container mt-5">
+        <div class="row">
+            <div class= "col-md-8 col-lg-8">
+                <div class="content-section" style="border: solid 1px grey; border-radius: 15px; padding: 30px;">
+                    {% for profile in profile_data %}
+                        <div class="media mr-3" style="display: flex; flex-direction: column;">
+                            <div class="media-body">
+                                <img class="rounded-circle account-img" width="200" height="200" src="{{ profile.image.url }}">
+                            </div>
+                            
+                            <div class="media-body mt-4">
+                                <h2 class="account-heading">{{ profile.user.first_name }}&nbsp;{{ profile.user.last_name }}</h2>
+                                <p class="text-secondary"><b>Email: </b>{{ profile.user.email }}</p>
+                                <p class="text-secondary"><b>Contact: </b>{{ profile.phone_number }}</p>
+                                <p class="text-secondary" style="text-align: justify"><b>About Me: </b>{{ profile.about_me }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class= "col-md-4 col-lg-4">
+                <h4 class="text-secondary"><i class="fa fa-angle-double-right"></i><b>&nbsp;Shortcuts</b></h4>
+                <ul class="list-group">
+                    <li class="list-group-item"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="list-group-item"><a href="{% url 'products' %}">Products</a></li>
+                    <li class="list-group-item"><a href="{% url 'addresses' %}">Addresses</a></li>
+                    <li class="list-group-item">Orders</li>
+                    <li class="list-group-item">Offers</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+	
+{%endblock content%}

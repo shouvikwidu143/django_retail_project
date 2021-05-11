@@ -1,0 +1,104 @@
+{%extends "home/base.html"%}
+{%block content%}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-lg-2">
+            </div>
+            <div class="col-md-7 col-lg-7 mt-4">
+                <h3 class="text-center">{% if object %}Update{% else %}Add new{% endif %} Address Details</h3>
+                <div class="mb-4" style="margin:auto; width:75%; border-bottom: solid 1px grey;"></div>
+                <form method="POST">
+                    {% csrf_token %} 
+                    <div class="form-group">
+                        <label for="contact_name_id"><b>Contact Name</b><span class="text-danger">*</span></label>
+                        <input type="contact_name" class="form-control" value="{% if object.contact_name %}{{object.contact_name}}{% endif %}" name="contact_name" id="contact_name_id" aria-describedby="contact_name-help-id" placeholder="">
+                        {% for err in form.contact_name.errors %}
+                            <small id="contact_name-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="contact_number_id"><b>Contact Number</b><span class="text-danger">*</span></label>
+                        <input type="contact_number" class="form-control" value="{% if object.contact_number %}{{object.contact_number}}{% endif %}" name="contact_number" id="contact_number_id" aria-describedby="contact_number-help-id" placeholder="">
+                        {% for err in form.contact_number.errors %}
+                            <small id="contact_number-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="address_type_id"><b>Address Type</b><span class="text-danger">*</span></label>
+                        <input type="address_type" class="form-control" value="{% if object.address_type %}{{object.address_type}}{% endif %}" name="address_type" id="address_type_id" aria-describedby="address_type-help-id" placeholder="">
+                        {% for err in form.address_type.errors %}
+                            <small id="address_type-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="address_1_id"><b>Address Line 1</b><span class="text-danger">*</span></label>
+                        <input type="address_1" class="form-control" value="{% if object.address_1 %}{{object.address_1}}{% endif %}" name="address_1" id="address_1_id" aria-describedby="address_1-help-id" placeholder="">
+                        {% for err in form.address_1.errors %}
+                            <small id="address_1-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="address_2_id"><b>Address Line 2</b></label>
+                        <input type="address_2" class="form-control" value="{% if object.address_2 %}{{object.address_2}}{% endif %}" name="address_2" id="address_2_id" aria-describedby="address_2-help-id" placeholder="">
+                        {% for err in form.address_2.errors %}
+                            <small id="address_2-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="nearby_location_id"><b>Nearest Landmark</b><span class="text-danger">*</span></label>
+                        <input type="nearby_location" class="form-control" value="{% if object.nearby_location %}{{object.nearby_location}}{% endif %}" name="nearby_location" id="nearby_location_id" aria-describedby="nearby_location-help-id" placeholder="">
+                        {% for err in form.nearby_location.errors %}
+                            <small id="nearby_location-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="city_or_district_id"><b>Select City/District</b><span class="text-danger">*</span></label>
+                        <input type="city_or_district" class="form-control" value="{% if object.city_or_district %}{{object.city_or_district}}{% endif %}" name="city_or_district" id="city_or_district_id" aria-describedby="city_or_district-help-id" placeholder="">
+                        {% for err in form.city_or_district.errors %}
+                            <small id="city_or_district-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="state_id"><b>Select State</b><span class="text-danger">*</span></label>
+                        <input type="state" class="form-control" value="{% if object.state %}{{object.state}}{% endif %}" name="state" id="state_id" aria-describedby="state-help-id" placeholder="">
+                        {% for err in form.state.errors %}
+                            <small id="state-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="country_id"><b>Select Country</b><span class="text-danger">*</span></label>
+                        <input type="country" class="form-control" value="{% if object.country %}{{object.country}}{% endif %}" name="country" id="country_id" aria-describedby="country-help-id" placeholder="">
+                        {% for err in form.country.errors %}
+                            <small id="country-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode_id"><b>Type Valid Pincode</b><span class="text-danger">*</span></label>
+                        <input type="pincode" class="form-control" value="{% if object.pincode %}{{object.pincode}}{% endif %}" name="pincode" id="pincode_id" aria-describedby="pincode-help-id" placeholder="">
+                        {% for err in form.pincode.errors %}
+                            <small id="pincode-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group">
+                        <label for="delivery_instructions_id"><b>Any other Delivery Instructions</b></label>
+                        <input type="delivery_instructions" class="form-control" value="{% if object.delivery_instructions %}{{object.delivery_instructions}}{% endif %}" name="delivery_instructions" id="delivery_instructions_id" aria-describedby="delivery_instructions-help-id" placeholder="">
+                        {% for err in form.delivery_instructions.errors %}
+                            <small id="delivery_instructions-help-id" class="form-text text-danger">{{ err }}</small>
+                        {% endfor %}
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" name="is_primary_address" type="checkbox" id="id_is_primary_address" {% if object.is_primary_address %}checked{% endif %}>
+                        <label class="form-check-label" for="id_is_primary_address">
+                            Check for Default Address
+                        </label>
+                    </div>
+                    <br/>
+                    <button type="submit" class="btn btn-primary mb-2">{% if object %}Update{% else %}Add{% endif %}</button>
+                    <a class="btn btn-secondary mb-2 ml-3" href="{% url 'addresses' %}">Cancel</a>
+                </form>
+            </div>
+            <div class="col-md-2 col-lg-2">
+            </div>
+        </div>
+    </div>
+{% endblock content %}

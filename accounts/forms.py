@@ -2,6 +2,7 @@ from typing import Text
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Addresses, Profile
 
 
 class UserSignUpForm(UserCreationForm):
@@ -35,4 +36,52 @@ class UserSignUpForm(UserCreationForm):
             user.save()
 
         return user
+    
+    def clean_email(self):
+        data = self.cleaned_data['email']
+        if User.objects.filter(email=data).exists():
+            raise forms.ValidationError("This email already used")
+        return data
+    
+class UserUpdateForm(forms.ModelForm):
+    """docstring for UserUpdateForm"forms.ModelFormf __init__(self, arg):"""
+    email = forms.EmailField(required=True)
+    first_name = forms.CharField(required=True)
+
+    class Meta:
+        model = User
+        fields = ['email', 'first_name', 'last_name']
+
+
+class ProfileUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ['image', 'phone_number', 'about_me']
         
+# class AdressUpdateMetaForm(forms.ModelForm):
+    
+#     class Meta:
+#         model = Addresses
+#         fields = ['contact_name', 'contact_number', 'address_type',
+#               'address_1', 'address_2', 'nearby_location',
+#               'city_or_district', 'state', 'country','pincode',
+#               'delivery_instructions', 'is_primary_address'
+#               ]
+    
+#     def save(self, commit=True):
+#         address = super(AdressUpdateMetaForm, self).save(commit=False)
+#         address.is_primary_address = is_primary_address = self.cleaned_data['is_primary_address']
+#         if is_primary_address:
+#             all_addresses = Addresses.objects.filter(profile__id = self.request.user.profile.id)
+#             print(self.request.user.profile.id)
+#             print(all_addresses)
+#             for _each in all_addresses:
+#                 if _each.profile != self.request.user.profile:
+#                     _each.is_primary_address = False
+#                     _each.save()
+
+#         if commit:
+#             address.save()
+
+#         return address
