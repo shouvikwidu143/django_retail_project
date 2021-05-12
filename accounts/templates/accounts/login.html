@@ -1,4 +1,5 @@
 {%extends "home/base.html"%}
+{% block title %}<title>SD Retail - Login</title>{% endblock title %}
 {% load crispy_forms_tags %}
 {%block content%}
 <div class="content-section mt-5">
@@ -24,6 +25,9 @@
                         </div>
                         <br/>
                         <button type="submit" class="btn btn-primary">Login</button>
+                        <small class="text-muted ml-2">
+                            <a href="{% url 'password_reset' %}">&nbsp;Forgot Password?</a>
+                        </small>
                     </form>
                     <div class="border-top pt-3">
                         <small class="text-muted">

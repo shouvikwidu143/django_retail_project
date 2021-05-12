@@ -1,4 +1,5 @@
 {%extends "home/base.html"%}
+{% block title %}<title>SD Retail - Profile</title>{% endblock title %}
 {%block content%}
     <a class="btn btn-primary btn-corner ml-5 mt-5" href="{% url 'profile-edit' %}">Edit Profile</a>
     <div class="container mt-5">
@@ -21,7 +22,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class= "col-md-4 col-lg-4">
+            <div class= "col-md-3 col-lg-3 offset-1">
                 <h4 class="text-secondary"><i class="fa fa-angle-double-right"></i><b>&nbsp;Shortcuts</b></h4>
                 <ul class="list-group">
                     <li class="list-group-item"><a href="{% url 'home' %}">Home</a></li>
