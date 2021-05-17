@@ -19,8 +19,8 @@
                   {% endfor %}
               </div>
               <div class="form-group">
-                <label for="email_id"><b>Email</b><span class="text-danger">*</span></label>
-                <input type="email" class="form-control" name="email" id="email_id" aria-describedby="emailHelpId" placeholder="">
+                <label for="id_email"><b>Email</b><span class="text-danger">*</span></label>
+                <input type="email" autocomplete="email" class="form-control" name="email" id="id_email" value={{form.email.value}} aria-describedby="emailHelpId" placeholder="">
                 {% for err in form.email.errors %}
                   <small id="email-help-id" class="form-text text-danger">{{ err }}</small>
                 {% endfor %}

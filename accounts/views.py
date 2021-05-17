@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from .decorators import *
 from django.conf import settings
 from django.views.generic import (
     # ListView,
@@ -10,6 +11,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from allauth.socialaccount.views import SignupView
 from .forms import UserSignUpForm, UserUpdateForm, ProfileUpdateForm #, AdressUpdateMetaForm
 from .controllers import *
 from .models import *
@@ -18,28 +20,33 @@ from .models import *
 
 def test_view(request):
     return HttpResponse("I am god")
+    # csrfmiddlewaretoken: 4SRz3ohIszml6ixra9UlbEv8FQogdHvPXZIDaKOd0yUqaXwTef9qJjPPulxdCvYr
+    # username: shouvik
+    # password1: Sdas@9800
+    # password2: Sdas@9800
 
+class SocialSignUpView(SignupView):
+    template_name = 'accounts/social_signup.html'
+        
+@user_unauthenticated
 def signup_view(request):
-    if request.user.is_authenticated:
-        return redirect('home')
-    else:
-        errors = []
-        if request.method == 'POST':
-            captcha_value = request.POST.get("captcha")
-            form = UserSignUpForm(request.POST)
-            if captcha_value == settings.CAPTCHA_STRING:
-                if form.is_valid():
-                    form.save()
-                    username = form.cleaned_data.get('username')
-                    messages.success(request, f'Your {username} account has been created. You can login now.')
-                    return redirect('home')
-            else:
-                errors.append("Invalid Captcha")
+    errors = []
+    if request.method == 'POST':
+        captcha_value = request.POST.get("captcha")
+        form = UserSignUpForm(request.POST)
+        if captcha_value == settings.CAPTCHA_STRING:
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get('username')
+                messages.success(request, f'Your {username} account has been created. You can login now.')
+                return redirect('home')
         else:
-            settings.CAPTCHA_STRING = random_string = generate_random_string(6)
-            generate_captch(random_string, settings.MEDIA_ROOT+"/captcha/captcha.png")
-            form = UserSignUpForm()
-        return render(request, 'accounts/signup.html', {'form': form, "captcha":"captcha.png", "errors":errors})
+            errors.append("Invalid Captcha")
+    else:
+        settings.CAPTCHA_STRING = random_string = generate_random_string(6)
+        generate_captch(random_string, settings.MEDIA_ROOT+"/captcha/captcha.png")
+        form = UserSignUpForm()
+    return render(request, 'accounts/signup.html', {'form': form, "captcha":"captcha.png", "errors":errors})
     
 @login_required
 def profile(request):

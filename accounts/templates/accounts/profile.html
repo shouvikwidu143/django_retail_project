@@ -9,7 +9,11 @@
                     {% for profile in profile_data %}
                         <div class="media mr-3" style="display: flex; flex-direction: column;">
                             <div class="media-body">
+                            {% if user.socialaccount_set.exists == False %}
                                 <img class="rounded-circle account-img" width="200" height="200" src="{{ profile.image.url }}">
+                            {% else %}
+                                <img class="rounded-circle account-img" width="200" height="200" src="{{ user.socialaccount_set.values.first.extra_data.picture }}">
+                            {% endif %}
                             </div>
                             
                             <div class="media-body mt-4">

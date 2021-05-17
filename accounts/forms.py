@@ -1,8 +1,10 @@
 from typing import Text
+from allauth.socialaccount.forms import SignupForm
+from allauth.socialaccount.adapter import get_adapter
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Addresses, Profile
+from .models import Profile
 
 
 class UserSignUpForm(UserCreationForm):

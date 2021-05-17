@@ -1,38 +1,52 @@
 {%extends "home/base.html"%}
 {% block title %}<title>SD Retail - Login</title>{% endblock title %}
-{% load crispy_forms_tags %}
+{% load socialaccount %}
 {%block content%}
 <div class="content-section mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-2 col-lg-2"></div>
             <div class="col-md-7 col-lg-7">
-                <div class="login-form-container">
-                    <h3 class="text-center text-danger"><b>Login Here</b></h3>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="username_id" name="username" aria-describedby="username_help" placeholder="Enter Username">
-                            {% for err in form.username.errors %}
-                                <small id="username-help-id" class="form-text text-danger">{{ err }}</small>
-                            {% endfor %}
+                <div class="login-form-container d-flex justify-content-between">
+                    <div class="w-50 mr-3">
+                        <div class="pt-2 d-flex align-top" style="flex-direction: column;">
+                            <h4 class="text-success mx-2 align-top mb-1">Sign in with</h4>
+                            <a href="{% provider_login_url "google" %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-google"></i>&nbsp;Google</a>
+                            <a href="#" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-facebook"></i>&nbsp;Facebook</a>
+                            <a class="my-2 btn btn-outline-dark mx-2 align-top" href="{% url 'signup' %}"><i class="fas fa-at"></i>&nbsp;Sign up with email</a>
                         </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="password_id" name="password" placeholder="Password">
-                            {% for err in form.password.errors %}
-                                <small id="password-help-id" class="form-text text-danger">{{ err }}</small>
-                            {% endfor %}
-                        </div>
-                        <br/>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                        <small class="text-muted ml-2">
-                            <a href="{% url 'password_reset' %}">&nbsp;Forgot Password?</a>
-                        </small>
-                    </form>
-                    <div class="border-top pt-3">
-                        <small class="text-muted">
-                            Need An Account? <a class="ml-2" href="{% url 'signup' %}">Sign Up Now</a>
-                        </small>			
+                    </div>
+                    <div class="border-left pl-5 w-50 ml-4">
+                        <h3 class="text-center text-danger"><b>Login Here</b></h3>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="username_id" name="username" aria-describedby="username_help" placeholder="Enter Username">
+                                {% for err in form.username.errors %}
+                                    <small id="username-help-id" class="form-text text-danger">{{ err }}</small>
+                                {% endfor %}
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password_id" name="password" placeholder="Password">
+                                {% for err in form.password.errors %}
+                                    <small id="password-help-id" class="form-text text-danger">{{ err }}</small>
+                                {% endfor %}
+                            </div>
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <small class="text-muted ml-2">
+                                <a href="{% url 'password_reset' %}">&nbsp;Forgot Password?</a>
+                            </small>
+                            {% comment %} <small class="text-muted ml-2">
+                                <a href="{% provider_login_url "google" %}" class="btn btn-outline-dark"><i class="fab fa-google"></i>&nbsp;Google</a>
+                            </small>
+                            {% endcomment %}
+                        </form>
+                        {% comment %} <div class="border-top pt-3">
+                            <small class="text-muted">
+                                Need An Account? <a class="ml-2" href="{% url 'signup' %}">Sign Up Now</a>
+                            </small>			
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
