@@ -1,25 +1,10 @@
 from django.contrib import admin
-from .models import *
-from import_export import resources
 from import_export.admin import ImportExportModelAdmin
+from .models import *
+from .resources import *
 
 # Register your models here.
 
-class ProductsResource(resources.ModelResource):
-    
-    class Meta:
-        model = Products
-        
-class ProductSpecificationResource(resources.ModelResource):
-    
-    class Meta:
-        model = ProductSpecification
-        
-class ProductImagesResource(resources.ModelResource):
-    
-    class Meta:
-        model = ProductImages
-        
 class ProductsAdmin(ImportExportModelAdmin):
     resource_class = ProductsResource
     

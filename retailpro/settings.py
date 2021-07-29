@@ -16,7 +16,6 @@ from datetime import datetime
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -117,6 +117,27 @@ SOCIALACCOUNT_PROVIDERS = {
         'AUTH_PARAMS': {
             'access_type': 'online',
         }
+    },
+    'facebook': {
+        'METHOD': 'oauth2',
+        'SDK_URL': '//connect.facebook.net/en_us/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'en_US',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v7.0',
     }
 }
 
@@ -141,6 +162,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.request',
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
@@ -203,11 +236,20 @@ LOGGING = {
         # 'special': {
         #     '()': 'project.logging.SpecialFilter',
         # },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        },
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         },
     },
     'handlers': {
+        'app_file_debug': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(BASE_DIR, "retailpro", "logs", "retail_pro_app_"+str(datetime.now().strftime("%d%m%Y"))+".log"),
+            'formatter': 'verbose'
+        },
         'file_debug': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
@@ -235,7 +277,7 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            # 'filters': ['special']
+            'filters': ['require_debug_false']
         }
     },
     'loggers': {
@@ -247,12 +289,12 @@ LOGGING = {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
-            'propagate': False,
+            'propagate': True,
         },
-        # 'retailpro': {
-        #     'handlers': ['console', 'mail_admins'],
-        #     'level': 'INFO',
-        #     'filters': ['special']
-        # }
+        'retailpro': {
+            'handlers': ['app_file_debug','console', 'mail_admins'],
+            'level': 'INFO',
+            'filters': ['require_debug_true']
+        }
     }
 }

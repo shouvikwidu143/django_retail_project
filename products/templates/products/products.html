@@ -27,7 +27,7 @@
                         </a>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title"><a href="{% url 'product-details' product.product_sku_number %}" class="link-primary" style="text-decoration: none;">{{product.product_name}}</a></h5>
+                        <h5 class="card-title"><a href="{% url 'product-details' product.product_slug %}" class="link-primary" style="text-decoration: none;">{{product.product_name}}</a></h5>
                         <div class="border-bottom w-100"></div>
                         <p class="card-text my-1"><b>MRP Price:&nbsp;</b><i class="fas fa-rupee-sign"></i>&nbsp;<span  class="text-dark">{{product.unit_price}}</span></p>
                         <p class="card-text"><b>Offer Price:&nbsp;</b><i class="fas fa-rupee-sign"></i>&nbsp;<span  class="text-danger">{{product.unit_price}}</span></p>

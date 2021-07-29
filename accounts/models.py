@@ -1,8 +1,9 @@
+from products.models import Products
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
 from django.urls import reverse
-# from .views import addresses_view
+from products.models import Products
 # Create your models here.
 
 def user_directory_path(instance, filename):
@@ -49,4 +50,24 @@ class Profile(models.Model):
             output_size = (300, 300)
             img.thumbnail(output_size)
             img.save(self.image.path)
-        
+            
+class WishList(models.Model):
+    wishlist_name = models.SlugField(default="slug", max_length=255, null=True, blank=True, unique= True)
+    user = models.OneToOneField(User, related_name='wishlist_by_user', on_delete=models.CASCADE)
+    added_on = models.DateField(auto_now = True)
+    misc_attr_1 = models.CharField(null=True, default=None, blank=True, max_length=128)
+    
+    def __str__(self):
+        return f'{self.user.username}\'s wishlist'
+    
+    def get_absolute_url(self):
+        return reverse('profile')
+    
+class WishListItem(models.Model):
+    user_wishlist = models.ForeignKey(WishList, related_name='wishlist_owner', on_delete=models.CASCADE)
+    product_sku_number = models.ForeignKey(Products, on_delete=models.CASCADE, to_field='product_sku_number')
+    added_on = models.DateField(auto_now = True)
+    misc_attr_1 = models.CharField(null=True, default=None, blank=True, max_length=128)
+    
+    def __str__(self):
+        return f'{self.user_wishlist.user.username}\'s wishlist item {self.product_sku_number.product_name}'

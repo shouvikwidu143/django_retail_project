@@ -1,12 +1,12 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import *
 from django.conf import settings
 from django.views.generic import (
-    # ListView,
-    # DetailView,
+    ListView,
+    DetailView,
     CreateView,
     UpdateView,
     DeleteView
@@ -176,3 +176,20 @@ class AddressSetDefaultView(LoginRequiredMixin, UserPassesTestMixin, UpdateView)
         if self.request.user == addresses.profile.user:
             return True
         return False
+    
+class WishListView(LoginRequiredMixin, UserPassesTestMixin, ListView):
+    model = WishList
+    template_name = 'accounts/user_wishlist.html' 
+    context_object_name = 'wish_list_items'
+    
+    def test_func(self):
+        wish_list_owner = get_object_or_404(WishList, wishlist_name=self.kwargs.get('user_wishlist'))
+        if self.request.user != wish_list_owner.user:
+            return False
+        return True
+    
+    def get_queryset(self):
+        wish_list_owner = get_object_or_404(WishList, wishlist_name=self.kwargs.get('user_wishlist'))
+        return WishListItem.objects.filter(user_wishlist=wish_list_owner)
+
+        

@@ -21,4 +21,5 @@ urlpatterns = [
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='accounts/password_reset_complete.html'), name='password_reset_complete'),
     path('profile/password-change', auth_views.PasswordChangeView.as_view(template_name='accounts/password_change_form.html'), name='password_change'),
     path('profile/password-change/done', auth_views.PasswordChangeDoneView.as_view(template_name='accounts/password_change_done.html'), name='password_change_done'),
+    path('wishlist/<slug:user_wishlist>', WishListView.as_view(), name='wish_list_url'),
 ]

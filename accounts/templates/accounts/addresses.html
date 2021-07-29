@@ -1,4 +1,6 @@
 {%extends "home/base.html"%}
+{% load static %}
+{% block custom_css %}<link rel="stylesheet" href="{% static 'css/addresses.css' %}" >{% endblock custom_css %}
 {% block title %}<title>SD Retail - Address</title>{% endblock title %}
 {%block content%}
     <a class="btn btn-primary btn-corner ml-5 mt-5" href="{% url 'address-new' %}"><i class="far fa-plus-square"></i>&nbsp;Add New Addresses</a>
@@ -13,15 +15,16 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ address_data.contact_name }} {% if address_data.is_primary_address %}(Default){% endif %}</h5>
                                 <div class="mb-2" style="border-bottom: solid 1px grey; "></div>
-                                <p class="text-secondary"><b>Address Type: </b>{{ address_data.address_type }}</p>
-                                <p class="text-secondary"><b>Address: </b>{{ address_data.address_1 }}<br/>{% if address_data.address_2 %}{{ address_data.address_2 }}{% endif %}</p>
-                                <p class="text-secondary"><b>Nearby Location: </b>{{ address_data.nearby_location }}</p>
-                                <p class="text-secondary"><b>City/District: </b>{{ address_data.city_or_district }}</p>
-                                <p class="text-secondary"><b>State: </b>{{ address_data.state }}</p>
-                                <p class="text-secondary"><b>Country: </b>{{ address_data.country }}</p>
-                                <p class="text-secondary"><b>Pincode: </b>{{ address_data.pincode }}</p>
-                                <p class="text-secondary"><b>Delivery Instructions: </b>{% if address_data.delivery_instructions %}{{ address_data.delivery_instructions }}{% endif %}</p>
-                                <p class="text-secondary"><b>Contact Number: </b>{{ address_data.contact_number }}</p>
+                                <p class="text-secondary address-line"><b>Address Type: </b>{{ address_data.address_type }}</p>
+                                <p class="text-secondary address-line"><b>Address: </b>{{ address_data.address_1 }}<br/>{% if address_data.address_2 %}{{ address_data.address_2 }}{% endif %}</p>
+                                {% comment %} <p class="text-secondary address-line"><b>City/District: </b>{{ address_data.city_or_district }}</p>
+                                <p class="text-secondary address-line"><b>State: </b>{{ address_data.state }}</p>
+                                <p class="text-secondary address-line"><b>Country: </b>{{ address_data.country }}</p>
+                                <p class="text-secondary address-line"><b>Pincode: </b>{{ address_data.pincode }}</p> {% endcomment %}
+                                <p class="text-secondary address-line">{{ address_data.city_or_district }}, {{ address_data.state }}, {{ address_data.pincode }}, {{ address_data.country }}</p>
+                                <p class="text-secondary address-line"><b>Nearby Location: </b>{{ address_data.nearby_location }}</p>
+                                <p class="text-secondary address-line"><b>Delivery Instructions: </b>{% if address_data.delivery_instructions %}{{ address_data.delivery_instructions }}{% endif %}</p>
+                                <p class="text-secondary address-line"><b>Contact Number: </b>{{ address_data.contact_number }}</p>
                                 <a href="{% url 'address-edit' address_data.id %}" class="card-link">Edit</a>
                                 <span>&nbsp;|&nbsp;</span>
                                 <a href="{% url 'address-delete' address_data.id %}" class="card-link">Remove</a>
@@ -35,14 +38,13 @@
             <div class= "col-md-3 col-lg-3">
                 <h4 class="text-secondary"><i class="fa fa-angle-double-right"></i><b>&nbsp;Shortcuts</b></h4>
                 <ul class="list-group">
-                    <li class="list-group-item"><a href="{% url 'home' %}">Home</a></li>
-                    <li class="list-group-item"><a href="{% url 'products' %}">Products</a></li>
-                    <li class="list-group-item"><a href="{% url 'addresses' %}">Addresses</a></li>
-                    <li class="list-group-item">Orders</li>
-                    <li class="list-group-item">Offers</li>
+                    <li class="list-group-item"><a href="{% url 'home' %}"><i class="fas fa-house-user"></i>&nbsp;Home</a></li>
+                    <li class="list-group-item"><a href="{% url 'wish_list_url' user.wishlist_by_user.wishlist_name %}"><i class="fas fa-heart"></i>&nbsp;Wishlist</a></li>
+                    <li class="list-group-item"><a href="{% url 'addresses' %}"><i class="fas fa-map-marker-alt"></i>&nbsp;Addresses</a></li>
+                    <li class="list-group-item"><i class="fas fa-shopping-bag"></i>&nbsp;Orders</li>
+                    <li class="list-group-item"><i class="fas fa-percentage"></i>&nbsp;Offers</li>
                 </ul>
             </div>
         </div>
     </div>
-	
 {%endblock content%}

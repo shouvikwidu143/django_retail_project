@@ -1,6 +1,7 @@
 {%extends "home/base.html"%}
 {% block title %}<title>SD Retail - Login</title>{% endblock title %}
 {% load socialaccount %}
+{% providers_media_js %}
 {%block content%}
 <div class="content-section mt-5">
     <div class="container">
@@ -12,7 +13,7 @@
                         <div class="pt-2 d-flex align-top" style="flex-direction: column;">
                             <h4 class="text-success mx-2 align-top mb-1">Sign in with</h4>
                             <a href="{% provider_login_url "google" %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-google"></i>&nbsp;Google</a>
-                            <a href="#" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-facebook"></i>&nbsp;Facebook</a>
+                            <a href="{% provider_login_url "facebook" method="oauth2" %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-facebook"></i>&nbsp;Facebook</a>
                             <a class="my-2 btn btn-outline-dark mx-2 align-top" href="{% url 'signup' %}"><i class="fas fa-at"></i>&nbsp;Sign up with email</a>
                         </div>
                     </div>
@@ -53,5 +54,5 @@
             <div class="col-md-2 col-lg-2"></div>
         </div>
     </div>
-</div>    
+</div>
 {%endblock content%}

@@ -9,7 +9,7 @@
                     <div id="id_product_images" class="carousel slide border border-secondary" style="border-radius: 10px;" data-ride="carousel">
                         <div class="carousel-inner">
                             {% for prod_img in object.productimages_set.all %}
-                                <div class="carousel-item m-4">
+                                <div class="carousel-item">
                                     <img class="d-block w-75 m-auto" src="{{ prod_img.product_img_url }}" alt="{{ prod_img.product_img_url }}">
                                 </div>
                             {% endfor %}
@@ -37,7 +37,7 @@
                         <h5 class="px-2 text-light bg-dark"><i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;Product Specifications</h5>
                         <ul class="ml-4 list-styled">
                             {% for spec in object.productspecification_set.all %}
-                                <li class="list-items">{{spec.product_specs}}</li>
+                                <li class="list-items"><b>{{spec.product_specs_title}}:&nbsp;</b>{{spec.product_specs}}</li>
                             {% endfor %}
                         </ul>
                     </div>
