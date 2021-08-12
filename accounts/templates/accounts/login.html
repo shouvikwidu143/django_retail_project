@@ -12,8 +12,8 @@
                     <div class="w-50 mr-3">
                         <div class="pt-2 d-flex align-top" style="flex-direction: column;">
                             <h4 class="text-success mx-2 align-top mb-1">Sign in with</h4>
-                            <a href="{% provider_login_url "google" %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-google"></i>&nbsp;Google</a>
-                            <a href="{% provider_login_url "facebook" method="oauth2" %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-facebook"></i>&nbsp;Facebook</a>
+                            <a href="{% provider_login_url 'google' %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-google"></i>&nbsp;Google</a>
+                            <a href="{% provider_login_url 'facebook' method='oauth2' %}" class="my-2 btn btn-outline-dark mx-2 align-top"><i class="fab fa-facebook"></i>&nbsp;Facebook</a>
                             <a class="my-2 btn btn-outline-dark mx-2 align-top" href="{% url 'signup' %}"><i class="fas fa-at"></i>&nbsp;Sign up with email</a>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                                 <a href="{% url 'password_reset' %}">&nbsp;Forgot Password?</a>
                             </small>
                             {% comment %} <small class="text-muted ml-2">
-                                <a href="{% provider_login_url "google" %}" class="btn btn-outline-dark"><i class="fab fa-google"></i>&nbsp;Google</a>
+                                <a href="{% provider_login_url 'google' %}" class="btn btn-outline-dark"><i class="fab fa-google"></i>&nbsp;Google</a>
                             </small>
                             {% endcomment %}
                         </form>

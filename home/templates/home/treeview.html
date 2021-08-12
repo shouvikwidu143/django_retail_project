@@ -1,0 +1,69 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}<title>SD Retail - Home</title>{% endblock title %}
+{% block content %}
+<div id="treeview-context-menuid" class="treeview-context-menu">
+    <div class="treeview-context-menu-item">Share On Facebook</div>
+    <div class="treeview-context-menu-item">Share On Twitter</div>
+    <hr>
+    <div class="treeview-context-menu-item">Search On Google</div>
+    <div class="treeview-context-menu-item">Search On Bing</div>
+    <hr>
+    <div class="treeview-context-menu-item">Bookmark</div>
+</div>
+<div class="container" style="min-height: 70vh; display: flex">
+    <div class="content-tree-element tree-side-border">
+        <div class="treeview">
+            <ul class="parent">
+                <li class="child" id="/">
+                    <span class="tree-icon"></span>
+                    <span class="tree-content">/</span>
+                    <ul class="parent">
+                        <li class="child" id="/users">
+                            <span class="tree-icon"></span>
+                            <span class="tree-content">Users</span>
+                        </li>
+                        <li class="child" id="/posts">
+                            <span class="tree-icon"></span>
+                            <span class="tree-content">Posts</span>
+                        </li>
+                        <li class="child" id="/comments">
+                            <span class="tree-icon"></span>
+                            <span class="tree-content">Comments</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="table-content">
+
+    </div>
+</div>
+<script src="{% static 'js/treeview.js' %}"></script>
+<script>
+    var menuDisplayed = false;
+    var menuBox = null;
+
+    $(".child").contextmenu((event) => {
+        if (event.target.classList.contains("tree-content")) {
+            event.stopPropagation();
+            event.preventDefault();
+            var left = event.clientX;
+            var top = event.clientY;
+
+            menuBox = window.document.querySelector("#treeview-context-menuid");
+            menuBox.style.left = left + "px";
+            menuBox.style.top = top + "px";
+            menuBox.style.display = "block";
+
+            menuDisplayed = true;
+        }
+    })
+    window.addEventListener("click", function () {
+        if (menuDisplayed == true) {
+            menuBox.style.display = "none";
+        }
+    }, true);
+</script>
+{% endblock content %}

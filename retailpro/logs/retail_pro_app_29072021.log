@@ -1,0 +1,5 @@
+DEBUG : 2021-07-29 20:45:18,785 : views : 4640 : 15132 : All Products: <QuerySet [<Products: Apple Airpods 1st Gen-Audio & Music>, <Products: Fire TV Stick (3rd Gen, 2021) with all-new Alexa Voice Remote-Entertainment>]>
+DEBUG : 2021-07-29 21:31:14,594 : views : 1340 : 6380 : All Products: <QuerySet [<Products: Apple Airpods 1st Gen-Audio & Music>, <Products: Fire TV Stick (3rd Gen, 2021) with all-new Alexa Voice Remote-Entertainment>]>
+DEBUG : 2021-07-29 21:37:47,492 : views : 1340 : 15804 : All Products: <QuerySet [<Products: Apple Airpods 1st Gen-Audio & Music>, <Products: Fire TV Stick (3rd Gen, 2021) with all-new Alexa Voice Remote-Entertainment>]>
+DEBUG : 2021-07-29 22:49:17,827 : views : 14588 : 5268 : Products Fetched 2
+DEBUG : 2021-07-29 22:49:55,502 : views : 14588 : 5268 : Selected Product: Apple Airpods 1st Gen-Audio & Music

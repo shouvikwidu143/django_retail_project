@@ -293,7 +293,7 @@ LOGGING = {
         },
         'retailpro': {
             'handlers': ['app_file_debug','console', 'mail_admins'],
-            'level': 'INFO',
+            'level': 'DEBUG',
             'filters': ['require_debug_true']
         }
     }

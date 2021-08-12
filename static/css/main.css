@@ -1,30 +1,164 @@
-*{
-    margin: 0;
-    padding: 0;
+* {
+  margin: 0;
+  padding: 0;
 }
-body{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.sign-up-form-container, .login-form-container{
-    border: 1px solid grey;
-    border-radius: 10px;
-    padding: 30px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-div.captcha-group{
-    display: flex;
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
-#cq_captchaimg{
-    width: 50%;
+.sign-up-form-container,
+.login-form-container {
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+div.captcha-group {
+  display: flex;
 }
 
-input.half-width{
-    width: 50%;
+#cq_captchaimg {
+  width: 50%;
 }
 
-.btn-corner{
-    position: relative;
-    left: 4%;
+input.half-width {
+  width: 50%;
+}
+
+.btn-corner {
+  position: relative;
+  left: 4%;
+}
+
+/* Treeview */
+.content-tree-element {
+  width: 40%;
+  min-width: 40%;
+  height: 70vh;
+  overflow: scroll;
+  resize: horizontal;
+  margin: 20px 5px;
+}
+.tree-side-border {
+  border: 2px solid black;
+}
+
+.treeview {
+  padding: 20px;
+}
+
+.parent {
+  border-left: 1px solid grey;
+}
+
+.child {
+  display: inline-block;
+}
+
+.parent,
+.child,
+.tree-content {
+  min-width: 100%;
+  box-sizing: content-box;
+}
+
+.tree-content {
+  white-space: nowrap;
+  user-select: all;
+}
+
+.treeview ul {
+  margin-left: 20px;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.tree-icon {
+  position: relative;
+}
+
+.tree-icon::before {
+  content: "\25b6";
+  display: inline-block;
+  margin: 5px;
+}
+
+.tree-icon-down::before {
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Safari */
+  transform: rotate(90deg);
+}
+
+.hide {
+  display: none;
+}
+
+.active-li {
+  background-color: #888888;
+  color: white;
+}
+
+/* Context Menu */
+.treeview-context-menu {
+  width: 150px;
+  background-color: #888888;
+  box-shadow: 3px 3px 5px #888888;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  border-radius: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  position: fixed;
+  display: none;
+}
+
+.treeview-context-menu-item {
+  height: 20px;
+  color: white;
+}
+
+.treeview-context-menu-item:hover {
+  background-color: #6cb5ff;
+  cursor: pointer;
+}
+
+/* Table Content */
+.table-content{
+  max-width: 55%;
+  margin: 20px 30px;
+  resize: vertical;
+}
+
+.table-content table{
+  background-color: lightgray;
+  color: black;
+  border-collapse: collapse;
+  min-width: 30%;
+}
+
+.table-content table tbody tr td{
+  user-select: all;
+}
+
+.table-content table th, .table-content table td{
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.table-content table td{
+  padding-left: 15px;
+}
+
+.table-content table tr:nth-child(odd) {
+  background-color: rgb(153, 149, 149);
+}
+
+.table-content table th{
+  background-color: rgb(55, 53, 56);
+  color: white;
+  min-width: 100px;
+  text-align: center;
+  padding-left: 15px;
 }
