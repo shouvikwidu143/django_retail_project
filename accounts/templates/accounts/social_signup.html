@@ -1,0 +1,57 @@
+{%extends "home/base.html"%}
+{% load i18n %}
+{% block title %}<title>SD Retail - Signup</title>{% endblock title %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-lg-2"></div>
+      <div class="col-md-7 col-lg-7">
+        <div class="sign-up-form-container mt-5">
+            <h1 class="text-center text-warning">{% trans "Sign Up" %}</h1>
+            <p class="text-justify text-info bg-dark p-3" style="border: 1px solid grey; border-radius: 15px;">{% blocktrans with provider_name=account.get_provider.name site_name=site.name %}You are about to use your {{provider_name}} account to login to
+                    {{site_name}}. As a final step, please complete the following form:{% endblocktrans %}</p>
+            <form method="POST">
+                {% csrf_token %} 
+                <div class="form-group">
+                    <label for="username_id"><b>Username</b><span class="text-danger">*</span></label>
+                    <input type="text"
+                    class="form-control" value="{{form.username.value}}" autocomplete="off" name="username" id="username_id" aria-describedby="username-help-id" placeholder="">
+                    {% for err in form.username.errors %}
+                        <small id="username-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="id_email"><b>Email</b><span class="text-danger">*</span></label>
+                    <input type="email" autocomplete="email" class="form-control" name="email" id="id_email" value="{{form.email.value}}" aria-describedby="emailHelpId" placeholder="">
+                    {% for err in form.email.errors %}
+                    <small id="email-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="firstname_id"><b>First Name</b><span class="text-danger">*</span></label>
+                    <input type="text"
+                    class="form-control" value="{{form.first_name.value}}" name="first_name" id="firstname_id" aria-describedby="firstname-help-id" placeholder="">
+                    {% for err in form.first_name.errors %}
+                    <small id="first_name-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="last_name_id"><b>Last Name</b></label>
+                    <input type="text"
+                    class="form-control" value="{{form.last_name.value}}" name="last_name" id="last_name_id" aria-describedby="last_name-help-id" placeholder="">
+                    {% for err in form.last_name.errors %}
+                        <small id="last_name-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div style="display:flex;">
+                    <button type="submit" class="btn btn-primary mr-3">Register</button>
+                    <small class="mt-2 form-text text-primary">Already have an account?&nbsp;<a href="{% url 'login' %}"><b>Sign In</b></a></small>
+                </div>
+            </form>
+        </div>
+      </div>
+    <div class="col-md-2 col-lg-2"></div>
+  </div>
+</div>
+    
+{% endblock content %}

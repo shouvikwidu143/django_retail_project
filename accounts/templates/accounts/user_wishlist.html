@@ -1,0 +1,29 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% block title %}<title>SD Retail - Wishlist</title>{% endblock title %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-muted mb-4">{% if user.first_name %}{{user.first_name|title}}{% else %}{{user|title}}{% endif %}'s Wishlist</h2>
+    <div class="content" style="min-height: 60vh;">
+        {% comment %} <div class="row"> {% endcomment %}
+            {% for item in wish_list_items %}
+                <div class="card flex-row flex-wrap mb-2">
+                    <div class="card-header border-0">
+                        <img width="100px" src="{{item.product_sku_number.productimages_set.first.product_img_url}}" alt="{{item.product_sku_number.product_name}}">
+                    </div>
+                    <div class="card-block px-2 mt-1" style="max-width: 70%;">
+                        <h5 class="card-title"><a href="{% url 'product-details' item.product_sku_number.product_slug %}" class="link-primary" style="text-decoration: none;">{{item.product_sku_number.product_name}}</a></h5>
+                        <div class="d-flex flex-row flex-wrap">
+                            <p class="card-text my-1 w-40"><b>MRP Price:&nbsp;</b><strike><i class="fas fa-rupee-sign"></i>&nbsp;<span  class="text-dark">{{item.product_sku_number.unit_price}}</span></strike></p>
+                            <p class="card-text w-40 ml-4"><b>Offer Price:&nbsp;</b><i class="fas fa-rupee-sign"></i>&nbsp;<span  class="text-danger">{{item.product_sku_number.unit_price}}</span></p>
+                        </div>
+                        <p class="card-text mt-2">{{item.product_sku_number.product_description}}</p>
+                    </div>
+                    <div class="w-100"></div>
+                </div>
+            {% endfor %}
+        {% comment %} </div> {% endcomment %}
+    </div>
+</div>
+
+{% endblock content %}

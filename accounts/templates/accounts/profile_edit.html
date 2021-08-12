@@ -1,0 +1,81 @@
+{%extends "home/base.html"%}
+{% block title %}<title>SD Retail - Edit Profile</title>{% endblock title %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-2 col-lg-2"></div>
+      <div class="col-md-7 col-lg-7">
+        <div class="sign-up-form-container mt-5">
+            <h2 class="text-center text-warning">Edit Profile</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %} 
+                <div class="form-group">
+                    <label for="email_id"><b>Email</b><span class="text-danger">*</span></label>
+                    <input type="email" class="form-control" value="{{ user.email }}" name="email" id="email_id" aria-describedby="emailHelpId" placeholder="">
+                    {% for err in u_form.email.errors %}
+                    <small id="email-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="firstname_id"><b>First Name</b><span class="text-danger">*</span></label>
+                    <input type="text"
+                    class="form-control" value="{{ user.first_name }}" name="first_name" id="firstname_id" aria-describedby="firstname-help-id" placeholder="">
+                    {% for err in u_form.first_name.errors %}
+                    <small id="first_name-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="last_name_id"><b>Last Name</b></label>
+                    <input type="text"
+                    class="form-control" value="{{ user.last_name }}" name="last_name" id="last_name_id" aria-describedby="last_name-help-id" placeholder="">
+                    {% for err in u_form.last_name.errors %}
+                        <small id="last_name-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="phone_number_id"><b>Mobile Number</b></label>
+                    <input type="text"
+                    class="form-control" value="{{ user.profile.phone_number }}" name="phone_number" id="phone_number_id" aria-describedby="phone_number-help-id" placeholder="">
+                    {% for err in p_form.phone_number.errors %}
+                        <small id="phone_number-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="about_me_id"><b>About Me</b></label>
+                    <textarea
+                    class="form-control" name="about_me" id="about_me_id" aria-describedby="about_me-help-id" placeholder="">{{ user.profile.about_me }}</textarea>
+                    {% for err in p_form.about_me.errors %}
+                        <small id="about_me-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                <div class="form-group">
+                    <label for="profile-image-id"><b>Profile Image</b></label>
+                    <input type="file" value="{{ user.profile.image.url }}" name="image" class="form-control-file" id="profile-image-id">
+                    {% for err in p_form.image.errors %}
+                        <small id="about_me-help-id" class="form-text text-danger">{{ err }}</small>
+                    {% endfor %}
+                </div>
+                
+                <div class="form-group captcha-group">
+                    <label for="captcha_id" class="mt-2 mr-2"><b>Captcha</b><span class="text-danger">*</span></label>
+                    <input type="text" class="form-control half-width mr-2" name="captcha" id="captcha_id" aria-describedby="captcha-help-id" >
+                    <img class="ml-2"id="cq_captchaimg" width="100" height="40" src="/media/captcha/{{captcha}}" alt="{{captcha}}">
+                </div>
+                {% for err in errors %}
+                    <div class="form-control form_captcha_img">
+                    <small id="captcha-help-id" class="form-text text-danger">{{ err }}</small>
+                    </div>
+                {% endfor %}
+                <br/>
+                <div style="display:flex;">
+                    <button type="submit" class="btn btn-primary mr-3">Save</button>
+                    <a href="{% url 'profile' %}" class="btn btn-danger mr-3">Cancel</a>
+                </div>
+          </form>
+        </div>
+      </div>
+    <div class="col-md-2 col-lg-2"></div>
+  </div>
+</div>
+    
+{% endblock content %}
