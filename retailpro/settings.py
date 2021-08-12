@@ -25,7 +25,11 @@ SECRET_KEY = '#p4e8r*ot1@b+)g+ef4&lo$==u)dua4!m*%aq04g70fn)&wqeo'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    'sd-retail.azurewebsites.net'
+]
 
 
 # Application definition
@@ -34,6 +38,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'home.apps.HomeConfig',
     'products.apps.ProductsConfig',
+    'whitenoise.runserver_nostatic',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,6 +57,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -193,10 +199,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 # Static Dirs
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static")
-]
-# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage')
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, "static")
+# ]
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
